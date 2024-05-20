@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
+require('dotenv').config();
 
 
 var db = mysql.createConnection({
@@ -16,6 +17,8 @@ var db = mysql.createConnection({
   port:"3306",
   database:"exercises"
 })
+
+//console.log(process.env.DB_PORT)
 
 const tableName = "workouts";
 
