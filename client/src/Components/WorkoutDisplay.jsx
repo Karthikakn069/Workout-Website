@@ -8,7 +8,7 @@ function WorkoutDisplay(props){
   const [timerArray,setTimerArray] = useState([]);
   const [workoutsArray , setWorkoutsArray] = useState([]);
   const [curPosIndex , setCurPosIndex] = useState(0);
-  const[curSet , setCurSet] = useState(0); 
+  //const[curSet , setCurSet] = useState(0); 
   useEffect(()=>{
     document.getElementById("workout-button").style.display = "none";
     let timerSet = [] , arraySet = ["break"];

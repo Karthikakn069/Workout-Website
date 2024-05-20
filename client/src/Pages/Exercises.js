@@ -6,10 +6,10 @@ import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
-import InputGroup from 'react-bootstrap/InputGroup';
-import DropDown from "react-bootstrap/DropDown";
+import InputGroup from 'react-bootstrap/esm/InputGroup.js';
+import DropDown from "react-bootstrap/esm/Dropdown.js";
 import GroupList from "../Components/GroupList.jsx"
-import {useNavigate , Outlet } from "react-router-dom";
+//import {useNavigate} from "react-router-dom";
 
 function Exercises(){
   const [data,setData] = useState([]);
@@ -18,7 +18,7 @@ function Exercises(){
   const [groupData,setGroupData] = useState([]);
   const [availData,setAvailData] = useState([]);
   const [searchVal , setSearchVal] = useState('');
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   useEffect(()=>{
     //axios.get('http://localhost:3001/exercises')
