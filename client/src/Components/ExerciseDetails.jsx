@@ -8,7 +8,9 @@ function ExerciseDetails({ide}){
   const [data,setData] = useState({});
   const [imageId,setImageId] = useState();
   useEffect(()=>{
-    axios.get(`http://localhost:3001/get_exercises/${id}`).then((response)=>{
+    //axios.get(`http://localhost:3001/get_exercises/${id}`)
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/get_exercises/${id}`)
+    .then((response)=>{
       setData(response.data);
       console.log(response.data)
       if(response.data[0]['indepth_youtube_explanation'] !== null)

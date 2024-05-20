@@ -21,12 +21,14 @@ function Exercises(){
   const navigate = useNavigate();
 
   useEffect(()=>{
-    axios.get('http://localhost:3001/exercises')
+    //axios.get('http://localhost:3001/exercises')
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/exercises`)
     .then((response)=>{
       //console.log(response);
       setData(response.data);
       setAvailData(response.data)
     });
+    //console.log(process.env.REACT_APP_BACKEND_URL)
   },[]);
   /*useEffect(()=>{
     console.log(data);

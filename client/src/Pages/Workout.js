@@ -57,7 +57,8 @@ function WorkOut(){
     if(document.getElementById("eqi-cable").checked){
       tEquipmentGroup.push("Cable");
     }
-    axios.post("http://localhost:3001/get_workouts",{muscleGroup:tMuscleGroup,equipmentsGroup:tEquipmentGroup})
+    //axios.post("http://localhost:3001/get_workouts",{muscleGroup:tMuscleGroup,equipmentsGroup:tEquipmentGroup})
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/get_workouts`,{muscleGroup:tMuscleGroup,equipmentsGroup:tEquipmentGroup})
     .then((response)=>{
       setGeneratedWorkout(response.data);
       //console.log(response.data);
