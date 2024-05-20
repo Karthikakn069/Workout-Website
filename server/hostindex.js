@@ -20,9 +20,9 @@ var db = mysql.createConnection({
 
 const tableName = "workouts";
 
-app.listen(port,()=>{
+/*app.listen(port,()=>{
   //console.log("Node running on port "+port);
-})
+})*/
 
 
 //to get entire data
