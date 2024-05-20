@@ -71,7 +71,7 @@ app.post('/get_workouts',(req,res)=>{
   for(var i = 1;i<equipment.length;i++){
     equipmentString = equipmentString+','+`'${equipment[i]}'`;
   }
-  const query = `SELECT * FROM exercises.workouts WHERE target_muscle_group IN(${musclesString}) AND primary_equipment IN(${equipmentString})`;
+  const query = `SELECT * FROM ${tableName} WHERE target_muscle_group IN(${musclesString}) AND primary_equipment IN(${equipmentString})`;
   db.query(query,(err,result,field)=>{
     if(err) {
       console.error(err);
