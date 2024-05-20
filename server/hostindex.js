@@ -10,17 +10,17 @@ app.use(cors());
 
 
 var db = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "root",
-  password: "asnk2004",
-  port:"3306",
-  database:"exercises"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  port:process.env.DB_PORT,
+  database:process.env.DB_NAME
 })
 
 const tableName = "workouts";
 
 app.listen(port,()=>{
-  console.log("Node running on port "+port);
+  //console.log("Node running on port "+port);
 })
 
 
@@ -75,4 +75,3 @@ app.get('/get_exercises/:id',(req,res)=>{
 app.get('/' ,(req,res)=>{
   res.send("Hi the backend is working");
 })
-
