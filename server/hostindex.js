@@ -10,13 +10,19 @@ app.use(cors());
 require('dotenv').config();
 
 
-var db = mysql.createConnection({
+const urlDB = `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}
+:${process.env.DB_PORT}/${process.env.DB_NAME}`;
+
+const db = mysql.createConnection();
+
+
+/*var db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   port:process.env.DB_PORT,
   database:process.env.DB_NAME
-})
+})*/
 
 const tableName = "workouts";
 
