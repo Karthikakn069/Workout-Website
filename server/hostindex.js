@@ -6,7 +6,11 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  origin:'https://freeworkoutgenerator.netlify.app',
+  optionSuccessStatus:200
+}
+));
 require('dotenv').config();
 
 
@@ -33,17 +37,29 @@ app.listen(port,()=>{
 
 
 //to get entire data
-db.connect((err)=>{
+// db.connect((err)=>{
+//   const query = `SELECT * FROM ${tableName}`;
+//   db.query(query,(err,result,fields)=>{
+//     if(err) throw err;
+//     else{
+//       app.get('/exercises',(req,res)=>{
+//         res.send(result);
+//       })
+//     }
+//   })
+// })
+
+app.get('/exercises', (req, res) => {
   const query = `SELECT * FROM ${tableName}`;
-  db.query(query,(err,result,fields)=>{
-    if(err) throw err;
-    else{
-      app.get('/exercises',(req,res)=>{
-        res.send(result);
-      })
+  db.query(query, (err, result) => {
+    if (err) {
+      console.error('Failed to execute query:', err.stack);
+      res.status(500).send('Failed to get exercises');
+    } else {
+      res.send(result);
     }
-  })
-})
+  });
+});
 
 app.post('/get_workouts',(req,res)=>{
   const muscles = req.body.muscleGroup;
