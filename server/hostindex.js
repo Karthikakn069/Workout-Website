@@ -28,7 +28,7 @@ const db = mysql.createConnection({
 const tableName = "workouts";
 
 app.listen(port,()=>{
-  //console.log("Node running on port "+port);
+  console.log("Node running on port "+port);
 })
 
 
@@ -59,6 +59,7 @@ app.post('/get_workouts',(req,res)=>{
   db.query(query,(err,result,field)=>{
     if(err) throw err;
     res.send(result);
+    console.log("this is working");
   })
   //console.log(musclesString,equipmentString);
   //res.send(muscles,equipment);
