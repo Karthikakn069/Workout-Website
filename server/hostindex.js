@@ -73,7 +73,9 @@ app.post('/get_workouts',(req,res)=>{
   }
   const query = `SELECT * FROM exercises.workouts WHERE target_muscle_group IN(${musclesString}) AND primary_equipment IN(${equipmentString})`;
   db.query(query,(err,result,field)=>{
-    if(err) throw err;
+    if(err) {
+      console.error(err);
+      throw err};
     res.send(result);
     console.log("this is working");
   })
