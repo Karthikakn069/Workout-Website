@@ -1,13 +1,13 @@
 const express = require('express');
 const mysql = require('mysql');
 const app = express();
-const port = 3001;
+const port = process.env.port||3001;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors({
-  origin:'https://freeworkoutgenerator.netlify.app',
+  origin:['https://freeworkoutgenerator.netlify.app','http://localhost:3000'],
   optionSuccessStatus:200
 }
 ));
@@ -58,6 +58,7 @@ app.listen(port,()=>{
 
 app.get('/exercises', (req, res) => {
   const query = `SELECT * FROM ${tableName}`;
+  console.log("erxercises page")
   db.query(query, (err, result) => {
     if (err) {
       console.error('Failed to execute query:', err.stack);

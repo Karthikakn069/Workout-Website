@@ -22,11 +22,25 @@ function Exercises(){
 
   useEffect(()=>{
     //axios.get('http://localhost:3001/exercises')
+    //console.log(process.env.REACT_APP_BACKEND_URL)
     axios.get(`${process.env.REACT_APP_BACKEND_URL}/exercises`)
     .then((response)=>{
       //console.log(response);
       setData(response.data);
       setAvailData(response.data)
+    })
+    .catch((error)=>{
+      if(error.response){
+        console.log(error.response);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      }
+      else if(error.request){
+        console.log(error.request);
+      }
+      else{
+        console.log(error.message);
+      }
     });
     //console.log(process.env.REACT_APP_BACKEND_URL)
   },[]);
