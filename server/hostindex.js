@@ -61,7 +61,7 @@ app.get('/exercises', (req, res) => {
   console.log("erxercises page")
   db.query(query, (err, result) => {
     if (err) {
-      console.error('Failed to execute query:', err.stack);
+      //console.error('Failed to execute query:', err.stack);
       res.status(500).send('Failed to get exercises');
     } else {
       res.send(result);
