@@ -12,6 +12,7 @@ app.use(cors({
 }
 ));
 require('dotenv').config();
+console.log(port)
 
 
 /*const urlDB = `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}
@@ -58,7 +59,7 @@ app.listen(port,()=>{
 
 app.get('/exercises', (req, res) => {
   const query = `SELECT * FROM ${tableName}`;
-  console.log("erxercises page")
+  console.log("exercises page")
   db.query(query, (err, result) => {
     if (err) {
       //console.error('Failed to execute query:', err.stack);
@@ -85,7 +86,7 @@ app.post('/get_workouts',(req,res)=>{
       console.error(err);
       throw err};
     res.send(result);
-    console.log("this is working");
+    //console.log("this is working");
   })
   //console.log(musclesString,equipmentString);
   //res.send(muscles,equipment);
@@ -101,6 +102,62 @@ app.get('/get_exercises/:id',(req,res)=>{
     else res.send(result);
   })
   //res.send(req.params)
+});
+
+app.post('/insert_exercises',(req,res)=>{
+  const exerciseName = req.body.exerciseName;
+  const exeDemo = req.body.exeDemo;
+  const exeInDepth = req.body.exeInDepth;
+  const exerciseDifficulty = req.body.exerciseDifficulty;
+  const targetMuscle = req.body.targetMuscle;
+  const primeMover = req.body.primeMover;
+  const secMover = req.body.secMover;
+  const terMover = req.body.terMover;
+  const equipNeeded = req.body.equipNeeded;
+  const posture = req.body.posture;
+  const bodyRegion = req.body.bodyRegion;
+  const movePattern = req.body.movePattern;
+  const planeOfMotion = req.body.planeOfMotion;
+  const laterality = req.body.laterality;
+  //console.log("put request");
+  //console.log(exerciseName)
+
+  const sqlQuery = `INSERT INTO ${tableName} (exercise,short_youTube_demonstration,indepth_youtube_explanation,difficulty_level,target_muscle_group,prime_mover_muscle,secondary_muscle,tertiary_muscle,primary_equipment,posture,body_region,movement_pattern_1,plane_of_motion_1,laterality) VALUES ('${exerciseName}','${exeDemo}','${exeInDepth}','${exerciseDifficulty}','${targetMuscle}','${primeMover}', '${secMover}', '${terMover}', '${equipNeeded}', '${posture}','${bodyRegion}','${movePattern}','${planeOfMotion}','${laterality}')`;
+  db.query(sqlQuery,(err,result,fields)=>{
+    if(err){
+      console.log(err);
+      throw err;
+    }
+    //console.log(result);
+    res.send(result);
+  })
+});
+
+app.get('/get_list/:selectOption/:searchValue',(req,res)=>{
+  const selectOption = req.params.selectOption;
+  const searchValue = req.params.searchValue;
+  //console.log(selectOption,searchValue);
+  const sqlQuery = `SELECT * FROM ${tableName} WHERE ${selectOption} LIKE '%${searchValue}%';`;
+  db.query(sqlQuery,(err,result,fields)=>{
+    if(err){
+      console.log(err);
+      throw err;
+    }
+    else{
+      res.send(result);
+    }
+  })
+})
+
+app.delete('/delete_exercise/:id',(req,res)=>{
+  const id = req.params.id;
+  const sqlQuery = `DELETE FROM ${tableName} WHERE id = ${id}`
+  db.query(sqlQuery,(err,result,fields)=>{
+    if(err){
+      console.log(err);
+    }
+    res.send(result);
+  })
 })
 
 

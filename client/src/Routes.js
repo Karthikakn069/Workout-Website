@@ -1,4 +1,4 @@
-import {createBrowserRouter , RouterProvider , createMemoryRouter} from 'react-router-dom';
+import {createBrowserRouter , RouterProvider} from 'react-router-dom';
 import Home from './Pages/Home';
 import Header from './Components/Header.jsx'
 import Exercises from './Pages/Exercises.js';
@@ -6,6 +6,7 @@ import DashBoard from './Pages/DashBoard.js';
 import VideoDemoes from './Pages/VideoDemoes.js';
 import WorkOut from './Pages/Workout.js';
 import ExerciseDetails from './Components/ExerciseDetails.jsx';
+import Admin from "./Pages/Admin.js"
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path : '/exercise_details/:id',
     element : <ExerciseDetails />
+  },
+  {
+    path:"/admin",
+    element : <Admin />
   }
 ])
 

@@ -34,6 +34,9 @@ function Header(){
             <NavDropdown.Item>Logout</NavDropdown.Item>
           </NavDropdown>
         </Nav> */}
+        {/* <Nav>
+          <Nav.Link href="/admin">Admin</Nav.Link>
+        </Nav> */}
       </Container>
       <hr style={{
         border:'2px solid black',
