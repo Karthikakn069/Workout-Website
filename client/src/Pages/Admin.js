@@ -5,8 +5,8 @@ import AdminRemove from "../Components/AdminRemove.jsx";
 
 function Admin(){
 
-  const [typeSwitch,setTypeSwitch] = useState(false);//def = true
-  const [adminLogin,setAdminLogin] = useState(true);//def = false
+  const [typeSwitch,setTypeSwitch] = useState(true);//def = true
+  const [adminLogin,setAdminLogin] = useState(false);//def = false
 
   const adminHandler = ()=>{
     const adminName = document.getElementById('admin-name').value, adminPassword = document.getElementById('admin-password').value;
