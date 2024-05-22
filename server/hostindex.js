@@ -59,7 +59,7 @@ app.listen(port,()=>{
 
 app.get('/exercises', (req, res) => {
   const query = `SELECT * FROM ${tableName}`;
-  console.log("exercises page")
+  //console.log("exercises page")
   db.query(query, (err, result) => {
     if (err) {
       //console.error('Failed to execute query:', err.stack);
