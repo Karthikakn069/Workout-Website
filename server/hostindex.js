@@ -14,6 +14,10 @@ app.use(cors({
 require('dotenv').config();
 console.log(port)
 
+var mcache = require('memory-cache');
+
+
+
 
 /*const urlDB = `mysql://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}
 :${process.env.DB_PORT}/${process.env.DB_NAME}`;
@@ -57,18 +61,41 @@ app.listen(port,()=>{
 //   })
 // })
 
-app.get('/exercises', (req, res) => {
+var cache = (duration)=>{
+  return (req,res,next)=>{
+    let key = '__express__'+req.originalUrl || req.url;
+    let cachedBody = mcache.get(key);
+    if(cachedBody){
+      console.log("Sending cached Response");
+      res.send(cachedBody);
+      return ;
+    }
+    else{
+      res.sendResponse = res.send;
+      res.send=(body)=>{
+        mcache.put(key,body,duration*1000);
+        res.sendResponse(body);
+      }
+      next();
+    }
+  }
+}
+
+app.get('/exercises', cache(90000), (req, res) => {
+  console.log("Sending from api call");
   const query = `SELECT * FROM ${tableName}`;
   //console.log("exercises page")
   db.query(query, (err, result) => {
     if (err) {
-      //console.error('Failed to execute query:', err.stack);
+      console.error('Failed to execute query:');
       res.status(500).send('Failed to get exercises');
     } else {
       res.send(result);
     }
   });
 });
+
+
 
 app.post('/get_workouts',(req,res)=>{
   const muscles = req.body.muscleGroup;
